@@ -1,0 +1,15 @@
+<h2>Contacts:</h2>
+<h4>You can phone me: <b>+7-920-1234567</b> </br> or </br> Send me Email: <b>kalininaa@list.ru</b></h4>
+</br></br></br>
+<p><%= @answer %></p>
+ <form action="/contacts" method="POST">
+ 	<label>Enter your name</label>
+ 	<input type="text" name="name" class="form-control" placeholder="Enter your Name" value="<%= @name %>">
+ 	<label>Enter your Email</label>
+ 	<input type="text" name="email" class="form-control" placeholder="Enter your Email" value="<%= @email %>">
+ 	<p><b>You can give us feedback here:</b></p>
+    <p><textarea class="form-control" rows="3" name="text"></textarea></p>
+    <center>
+    <p><button type="submit" class="btn btn-primary">Send</button></p>
+    </center>
+ </form>
