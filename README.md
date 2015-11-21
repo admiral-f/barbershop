@@ -1,4 +1,4 @@
-RubySchool, Lesson 22
+barbershop
 ==================== 
 
-Repository for Lesson 22
+Repository for Barbershop
