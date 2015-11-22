@@ -36,89 +36,73 @@
 
     <h4>Come on. Lets do it!!!</h4>
 <p><font color=green><%= @answer %></font></p>
-<form action="/visit" method="POST">    
- 	<div class="form-group"> 
- 	 	<label>Choose your barber</label> 
-	 	<select class="form-control" name="barber" >
-  			<option>Walter</option>
-  			<option>Jessie</option>
-  			<option>Larry</option>
-  		</select>
-  	</div>	
-  	</br>
-  	<div class="row">
-  		<div class="col-xs-6">
-    		<label>Enter your name</label>
-    		<input type="text" class="form-control" name="enter_name" placeholder="Enter your name" value="<%= @name %>">
-  		</div>
-  		<div class="col-xs-6">
-    		<label>Enter your phone number</label>
-    		<input type="text" class="form-control" name="phone" placeholder="X-(XXX)-XXX-XX-XX" value="<%= @phone %>">
-  		</div>
-  	</div>
-  	</br>
-  	<div class="row">
-  		<div class="col-xs-6">
-  			<label>Choose your day</label>
-    		<select class="form-control" name="visit_day">
-  				<option>Monday</option>
-				<option>Tuesday</option>
-				<option>Wednesday</option>
-				<option>Thursday</option>
-				<option>Friday</option>
-				<option>Saturday</option>
-				<option>Sunday</option>
-			</select>
-		</div>
-  		<div class="col-xs-6">
-  			<label>Choose your visit time</label>
-    		<select class="form-control" name="visit_time">
-  				<option>10.00-11.00</option>
-  				<option>11.00-12.00</option>
-  				<option>12.00-13.00</option>
-  				<option>13.00-14.00</option>
- 				<option>14.00-15.00</option>
-  				<option>15.00-16.00</option>
-  				<option>16.00-17.00</option>
-  				<option>17.00-18.00</option>
-  				<option>18.00-19.00</option>
-  				<option>19.00-20.00</option>
-  				<option>20.00-21.00</option>
-  				<option>21.00-22.00</option>
-			</select>
-  		</div>
-  	</div>
-  	</br>
-  	<center>
-  	<div class="form-group">
-  		<label>Choose your color for dyeing hair</label>
-		<select id="color" name="color">
-	  		<option value="#7bd148">Green</option>
-			<option value="#5484ed">Bold blue</option>
-			<option value="#a4bdfc">Blue</option>
-			<option value="#46d6db">Turquoise</option>
-			<option value="#7ae7bf">Light green</option>
-			<option value="#51b749">Bold green</option>
-			<option value="#fbd75b">Yellow</option>
-			<option value="#ffb878">Orange</option>
-			<option value="#ff887c">Red</option>
-			<option value="#dc2127">Bold red</option>
-			<option value="#dbadff">Purple</option>
-			<option value="#e1e1e1">Gray</option>
-		</select>
-	</div>
-	</center>	
-  	</br>
-  	<center>
-  		<p>
-  			<button type="submit" class="btn btn-primary btn-lg">Sing in</button>
-  		</p>
-  	</center>
+<form action="/" method="POST">    
+    <div class="row">
+      <div class="col-xs-6">
+        <label>Enter your name</label>
+        <input type="text" class="form-control" name="enter_name" placeholder="Enter your name" value="<%= @name %>">
+      </div>
+      <div class="col-xs-6">
+        <label>Enter your phone number</label>
+        <input type="text" class="form-control" name="phone" placeholder="X-(XXX)-XXX-XX-XX" value="<%= @phone %>">
+      </div>
+    </div>
+    </br>
+    <div class="row">
+      <div class="col-xs-6">
+        <label>Choose your day and time visit</label>
+        </br>
+        <input class="form-control" placeholder="2015/01/01 00:00" id="datetimepicker" type="text" name="date" value="<%= @visit_daytime %>">
+      </select>
+    </div>
+      <div class="col-xs-6">
+        <label>Choose your barber</label> 
+        <select class="form-control" name="barber" >
+        <option>Walter</option>
+        <option>Jessie</option>
+        <option>Larry</option>
+        </select>
+      </div>
+    </div>
+    </br>
+    <center>
+    <div class="form-group">
+      <label>Choose your color for dyeing hair   </label>
+    <select id="color" name="color">
+        <option value="#7bd148">Green</option>
+      <option value="#5484ed">Bold blue</option>
+      <option value="#a4bdfc">Blue</option>
+      <option value="#46d6db">Turquoise</option>
+      <option value="#7ae7bf">Light green</option>
+      <option value="#51b749">Bold green</option>
+      <option value="#fbd75b">Yellow</option>
+      <option value="#ffb878">Orange</option>
+      <option value="#ff887c">Red</option>
+      <option value="#dc2127">Bold red</option>
+      <option value="#dbadff">Purple</option>
+      <option value="#e1e1e1">Gray</option>
+    </select>
+  </div>
+  </center> 
+
+  
+
+   </br>
+    <center>
+      <p>
+        <button type="submit" class="btn btn-primary btn-lg">Sing in</button>
+      </p>
+    </center>
 </form>
 
 <script type="text/javascript">
-	$(function(){
-    	$('#color').simplecolorpicker();
-  	});
+  $(function(){
+    $('#color').simplecolorpicker();
+    jQuery('#datetimepicker').datetimepicker({
+       allowTimes:[
+        '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'  
+      ]
+    });
+  });
 </script>
 

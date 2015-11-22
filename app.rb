@@ -16,8 +16,7 @@ end
 def sign_up
   @name = params[:enter_name]
   @phone = params[:phone]
-  @visit_day = params[:visit_day]
-  @visit_time = params[:visit_time]
+  @visit_daytime = params[:date]
   @barber = params[:barber]
   @color = params[:color]
 
@@ -29,9 +28,9 @@ def sign_up
   
   if @error==''
     f1=File.open 'public/user.txt','a'
-    f1.write "User: <b>#{@name}</b></br> \n\tPhone: #{@phone}\n\tVisit day: #{@visit_day}\n\tVisit time: #{@visit_time}\n\tBarber: #{@barber}\n\tHair color: #{@color}</br>\n\n"
+    f1.write "User: <b>#{@name}</b></br> \n\tPhone: #{@phone}\n\tVisit: #{@visit_daytime}\n\tBarber: #{@barber}\n\tHair color: #{@color}</br>\n\n"
     f1.close
-    @error = "#{@name}! We are waiting your at #{@visit_day} #{@visit_time}"
+    @error = "#{@name}! We are waiting your at #{@visit_daytime}"
   end
   
   
