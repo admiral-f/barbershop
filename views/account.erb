@@ -6,7 +6,7 @@
    	  <th>Name</th>
    	  <th>Phone</th>
    	  <th>Date and time</th>
-   	  <th>Master</th>
+   	  <th>Barber</th>
    	  <th>Color</th>
     </tr>
   </thead>
@@ -19,6 +19,27 @@
    	  <td><%= row['barber'] %></td>
    	  <td style="background-color: <%= row['color'] %>"><%= row['color'] %></td>
    </tr>
+  <% end %>
+  </tbody>
+</table>
+</br>
+<p> Feedback </p>
+</br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+   	  <th>Name</th>
+   	  <th>Email</th>
+   	  <th>Message</th>
+   	</tr>
+  </thead>
+  <tbody>
+  <% @contacts.each do |row| %>
+   <tr>
+   	  <td><%= row['username'] %></td>
+   	  <td><%= row['email'] %></td>
+   	  <td><%= row['message'] %></td>
+   	</tr>
   <% end %>
   </tbody>
 </table>

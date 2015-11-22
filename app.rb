@@ -22,6 +22,14 @@ configure do
       "barber" TEXT,
       "color" TEXT
     )'
+
+  db.execute 'CREATE TABLE IF NOT EXISTS
+    "Contacts"
+    ("id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "username" TEXT,
+      "email" TEXT,
+      "message" TEXT
+    )'
 end
 
 helpers do
@@ -72,13 +80,9 @@ post '/login/attempt' do
   session[:identity] = params['username']
   password=params['password']
   if session[:identity]=='admin' && password=='secret'
-    #where_user_came_from = session[:previous_url] || '/'
-    #redirect to where_user_came_from
     erb :index
   elsif session[:identity]=='alex' && password=='secret'
-    #where_user_came_from = session[:previous_url] || '/'
-    #redirect to where_user_came_from
-    erb :account
+    erb :index
   else
     @error="wrong username or password"
     session[:identity]='Hello stranger'
@@ -96,10 +100,8 @@ get '/secure/place' do
   if session[:identity]=='admin'
     db = get_db
     
-    @views = db.execute 'select * from Users order by id desc'  
-    
-
-    #@views=File.read('public/user.txt')
+    @views = db.execute 'select * from Users order by id desc'
+    @contacts=db.execute 'select * from Contacts'  
     erb :account
   end 
 end
@@ -123,14 +125,13 @@ post '/contacts' do
   hh={:name=> "Please, enter your name", :email=>"Please, enter your phone Email", :text=>"Enter your text-message"}
   @error=hh.select {|key,_| params[key]==""}.values.join("; ")
   if @error==''
-    f=File.open 'public/contacts.txt','a'
-    f.write "User: #{@name}, Email: #{@email}, \nText: #{@text}.\n\n"
-    f.close
+    db = get_db
+    db.execute 'insert into Contacts (username, email, message) values (?,?,?)', [@name, @email, @text]
     Pony.mail(
       :to => "admiral-f@yandex.ru",
       :from => "admiral-f@yandex.ru",
       :subject => params[:name] + " has contacted you",
-      :body => params[:text],
+      :body => params[:email] + " write message: " + params[:text],
       :via => :smtp,
       :via_options => { 
         :address              => 'smtp.yandex.ru', 
