@@ -1,3 +1,24 @@
 <h2>Here is <%=username%>'s account</h2>
 </br>
-<%= @views %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+   	  <th>Name</th>
+   	  <th>Phone</th>
+   	  <th>Date and time</th>
+   	  <th>Master</th>
+   	  <th>Color</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @views.each do |row| %>
+   <tr>
+   	  <td><%= row['username'] %></td>
+   	  <td><%= row['phone'] %></td>
+   	  <td><%= row['datestamp'] %></td>
+   	  <td><%= row['barber'] %></td>
+   	  <td style="background-color: <%= row['color'] %>"><%= row['color'] %></td>
+   </tr>
+  <% end %>
+  </tbody>
+</table>

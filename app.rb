@@ -5,7 +5,9 @@ require 'pony'
 require "sqlite3"
 
 def get_db
-  return SQLite3::Database.new 'barbershop.db' 
+  db=SQLite3::Database.new 'barbershop.db'
+  db.results_as_hash = true
+  return db 
 end 
 
 configure do
@@ -92,9 +94,13 @@ end
 
 get '/secure/place' do
   if session[:identity]=='admin'
-    @views=File.read('public/user.txt')
+    db = get_db
+    
+    @views = db.execute 'select * from Users order by id desc'  
+    
+
+    #@views=File.read('public/user.txt')
     erb :account
-    #erb 'This is a secret place that only <%=session[:identity]%> has access to!'
   end 
 end
 
