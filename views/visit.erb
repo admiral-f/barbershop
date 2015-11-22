@@ -52,15 +52,15 @@
       <div class="col-xs-6">
         <label>Choose your day and time visit</label>
         </br>
-        <input class="form-control" placeholder="2015/01/01 00:00" id="datetimepicker" type="text" name="date" value="<%= @visit_daytime %>">
+        <input class="form-control" placeholder="0000/00/00 00:00" id="datetimepicker" type="text" name="date" value="<%= @visit_daytime %>">
       </select>
     </div>
       <div class="col-xs-6">
-        <label>Choose your barber</label> 
+       <label>Choose your barber</label> 
         <select class="form-control" name="barber" >
-        <option>Walter</option>
-        <option>Jessie</option>
-        <option>Larry</option>
+        <option <%= @barber == 'Walter' ? 'selected' : '' %>>Walter</option>
+        <option <%= @barber == 'Jessie' ? 'selected' : '' %>>Jessie</option>
+        <option <%= @barber == 'Larry' ? 'selected' : '' %>>Larry</option>
         </select>
       </div>
     </div>
