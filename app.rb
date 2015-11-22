@@ -4,10 +4,14 @@ require 'sinatra/reloader'
 require 'pony'
 require "sqlite3"
 
+def get_db
+  return SQLite3::Database.new 'barbershop.db' 
+end 
+
 configure do
   enable :sessions
-  @db = SQLite3::Database.new 'barbershop.db'
-  @db.execute 'CREATE TABLE IF NOT EXISTS
+  db = get_db
+  db.execute 'CREATE TABLE IF NOT EXISTS
     "Users"
     ("id" INTEGER PRIMARY KEY AUTOINCREMENT,
       "username" TEXT,
@@ -38,12 +42,11 @@ def sign_up
   
   
   if @error==''
-    f1=File.open 'public/user.txt','a'
-    f1.write "User: <b>#{@name}</b></br> \n\tPhone: #{@phone}\n\tVisit: #{@visit_daytime}\n\tBarber: #{@barber}\n\tHair color: #{@color}</br>\n\n"
-    f1.close
+    db = get_db
+    db.execute 'insert into Users (username, phone, datestamp, barber, color) values (?,?,?,?,?)', [@name, @phone, @visit_daytime, @barber, @color]
     @error = "#{@name}! We are waiting your at #{@visit_daytime}"
   end
-  
+
   
 end
 
