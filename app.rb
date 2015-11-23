@@ -79,7 +79,7 @@ def sign_up
   end
   
   if @error==''
-    db = get_db
+    #db = get_db
     db.execute 'insert into Users (username, phone, datestamp, barber, color) values (?,?,?,?,?)', [@name, @phone, @visit_daytime, @barber, @color]
     @error = "#{@name}! We are waiting your at #{@visit_daytime}"
   end
