@@ -14,6 +14,10 @@ def is_barber_exists? db, name
   db.execute('select * from Barbers where barber=?', [name]).length > 0
 end  
 
+def is_time_free? db, barber, datestamp
+  db.execute('select * from Users where barber=(?) and datestamp=(?)', [barber, datestamp]).length > 0
+end
+
 def seed_db db, barbers
   barbers.each do |barber|
     if !is_barber_exists? db, barber
@@ -69,8 +73,10 @@ def sign_up
   hh={:enter_name=> "Please, enter your name", :phone=>"Please, enter your phone number"}
   
   @error=hh.select {|key,_| params[key]==""}.values.join("; ")
-
-  
+  db=get_db
+  if is_time_free? db, @barber, @visit_daytime
+    @error ='Sorry! This time alredy busy'
+  end
   
   if @error==''
     db = get_db
