@@ -58,9 +58,9 @@
       <div class="col-xs-6">
        <label>Choose your barber</label> 
         <select class="form-control" name="barber" >
-        <option <%= @barber == 'Walter' ? 'selected' : '' %>>Walter</option>
-        <option <%= @barber == 'Jessie' ? 'selected' : '' %>>Jessie</option>
-        <option <%= @barber == 'Larry' ? 'selected' : '' %>>Larry</option>
+          <% @barber_name.each do |item| %>
+            <option <%= @barber == item['Barber'] ? 'selected' : '' %>><%= item['Barber'] %></option>
+          <% end %>
         </select>
       </div>
     </div>

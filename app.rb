@@ -26,7 +26,10 @@ def seed_db db, barbers
   end  
 end  
 
-
+before do
+  db = get_db
+  @barber_name = db.execute 'select * from Barbers'
+end
 
 configure do
   enable :sessions
@@ -79,7 +82,6 @@ def sign_up
   end
   
   if @error==''
-    #db = get_db
     db.execute 'insert into Users (username, phone, datestamp, barber, color) values (?,?,?,?,?)', [@name, @phone, @visit_daytime, @barber, @color]
     @error = "#{@name}! We are waiting your at #{@visit_daytime}"
   end
