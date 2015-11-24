@@ -83,7 +83,7 @@ def sign_up
   
   if @error==''
     db.execute 'insert into Users (username, phone, datestamp, barber, color) values (?,?,?,?,?)', [@name, @phone, @visit_daytime, @barber, @color]
-    @error = "#{@name}! We are waiting your at #{@visit_daytime}"
+    @answer = "#{@name}! We are waiting your at #{@visit_daytime}"
   end
 
   
@@ -170,7 +170,7 @@ post '/contacts' do
         :password             => 'kalinin1987', 
         :authentication       => :plain
     })
-    @error = 'Your message send'
+    @answer = 'Your message send'
   end  
   erb :contacts
 end
